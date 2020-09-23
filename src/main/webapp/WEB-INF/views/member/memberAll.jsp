@@ -35,7 +35,7 @@
 		<tbody>
 		 <c:forEach items="${list}" var="member">		
 			<tr height="30">
-				<td><a href="memberSelect.jsp">${member.id}</a></td>
+				<td><a href="memberSelect?id=${member.id}">${member.id}</a></td>
 				<td>${member.pass}</td>
 				<td>${member.gender}</td>  
 				<td>${member.job}</td>  

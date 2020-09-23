@@ -1,13 +1,15 @@
-package com.yedam.app.member;
+package com.yedam.app.member.service.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public interface DAO {
+import com.yedam.app.member.MemberVO;
+
+public interface MemberService {
 
 	//전체조회
-	ArrayList<MemberVO> selectAll(MemberVO memberVO);
+	ArrayList<MemberVO> selectAll();
 
 	//단건조회
 	MemberVO selectOne(MemberVO memberVO);
@@ -18,9 +20,9 @@ public interface DAO {
 	// 성별인원수 : select gender, count(id) cnt from members group by gender;
 	List<HashMap<String, Object>> getGenderCnt();
 
-	void delete(MemberVO memberVO);
+	int delete(MemberVO memberVO);
 
-	void update(MemberVO memberVO);
+	int update(MemberVO memberVO);
 
 	int insert(MemberVO memberVO);
 

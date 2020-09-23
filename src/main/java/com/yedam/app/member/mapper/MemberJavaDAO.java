@@ -1,4 +1,4 @@
-package com.yedam.app.member;
+package com.yedam.app.member.mapper;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,20 +8,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
+import com.yedam.app.member.MemberVO;
 
 import common.ConnectionManager;
 
-@Component	//스프링 컨테이너가 관리하도록 빈등록
-			//singletone
-public class MemberDAO implements DAO {
+//@Component	//스프링 컨테이너가 관리하도록 빈등록
+
+//singletone
+public class MemberJavaDAO implements MemberDAO {
 	Connection conn;
 	PreparedStatement pstmt;
 	ResultSet rs;
 	
 	//전체조회
 	@Override
-	public ArrayList<MemberVO> selectAll(MemberVO memberVO) {
+	public ArrayList<MemberVO> selectAll() {
 		MemberVO resultVO = null;
 		ArrayList<MemberVO> list = new ArrayList<MemberVO>(); 
 		
@@ -137,24 +138,26 @@ public class MemberDAO implements DAO {
 	
 	
 	@Override
-	public void delete(MemberVO memberVO) {
+	public int delete(MemberVO memberVO) {
+		int r = 0;
 		try {
 			conn = ConnectionManager.getConnnect();
 			String sql = "DELETE FROM MEMBERS WHERE ID = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memberVO.getId());
-			int r = pstmt.executeUpdate();
+			r = pstmt.executeUpdate();
 			System.out.println(r + "건이 삭제됨");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			ConnectionManager.close(conn);
 		}
-		
+		return r;
 	}
 	
 	@Override
-	public void update(MemberVO memberVO) {
+	public int update(MemberVO memberVO) {
+		int r=0;
 		try {
 			conn = ConnectionManager.getConnnect();
 			String sql = "UPDATE MEMBERS SET PASS = ?,GENDER = ?, JOB = ?, MAILYN = ?,HOBBY = ?, REASON = ? WHERE ID = ?";
@@ -166,14 +169,14 @@ public class MemberDAO implements DAO {
 			pstmt.setString(5, memberVO.getHobby());
 			pstmt.setString(6, memberVO.getReason());
 			pstmt.setString(7, memberVO.getId());
-			int r = pstmt.executeUpdate();
+			r = pstmt.executeUpdate();
 			System.out.println(r + "건이 입력됨");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			ConnectionManager.close(conn);
 		}
-		
+		return r;
 	}
 	
 	@Override
