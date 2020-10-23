@@ -25,14 +25,14 @@ public class MemberDAOClient {
 	
 	@Test @Ignore
 	public void selectTest() {
-		MemberVO memberVO = MemberVO.builder().id("ccc").pass("1111").build();
-		memberVO = dao.selectOne(memberVO);
-		assertEquals("1111", memberVO.getPass());
+		//MemberVO memberVO = MemberVO.builder().id("ccc").pass("1111").build();
+		//memberVO = dao.selectOne(memberVO);
+		//assertEquals("1111", memberVO.getPass());
 	}
 	
 	@Test @Ignore
 	public void insertTest() {
-		MemberVO memberVO = MemberVO.builder()
+		/* MemberVO memberVO = MemberVO.builder()
 											.id("ggoodd")
 											.pass("1111")
 											.gender("man")
@@ -40,13 +40,13 @@ public class MemberDAOClient {
 											.hobby("ski")
 											.reason("데헷")
 											.build();
-		dao.insert(memberVO);
+		//dao.insert(memberVO);*/
 	}
 	
 	public void deleteTest() {
-		MemberVO memberVO = MemberVO.builder().id("abcde").build();
+		//MemberVO memberVO = MemberVO.builder().id("abcde").build();
 											
-		dao.delete(memberVO);
+		//dao.delete(memberVO);
 	}
 	
 	

@@ -19,7 +19,7 @@ public class MemberServiceClient {
 	
 	@Test
 	public void selectTest() {
-		MemberVO memberVO = MemberVO.builder().id("ccc").build();
+		MemberVO memberVO = new MemberVO();
 		memberVO = service.selectOne(memberVO);
 		assertEquals("1111", memberVO.getPass());
 	}

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yedam.app.member.mapper.MemberDAO">
+	<select id="selectAll" resultType="member">
+		SELECT *
+			FROM MEMBERS
+			ORDER BY ID
+	</select>
+	
+	<select id="selectOne" resultType ="member" parameterType="member">
+		SELECT *
+			FROM MEMBERS
+			WHERE ID = #{id}
+	</select>
+	
+	<insert id="insert" parameterType="member">
+		INSERT INTO MEMBERS(ID, 
+							PASS, 
+							GENDER, 
+							JOB,
+							MAILYN,
+							REASON,
+							HOBBY)
+					VALUES( #{id},
+							#{pass},
+							#{gender},
+							#{job},
+							#{mailYn},
+							#{reason},
+							#{hobby},
+							SYSDATE)
+	</insert>
+	
+	<update id="update" parameterType="member">
+		UPDATE MEMBERS SET  PASS = #{pass},
+							GENDER = #{gender}, 
+							JOB = #{job}, 
+							MAILYN = #{mailYn},
+							HOBBY = #{hobby}, 
+							REASON = #{reason} 
+						WHERE ID = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="member">
+		DELETE FROM MEMBERS WHERE ID = #{id}
+	</delete>
+	
+</mapper>

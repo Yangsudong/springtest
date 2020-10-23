@@ -1,6 +1,7 @@
 package com.yedam.app.member.web;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +33,7 @@ public class MemberController {
 		model.addAttribute("list", memberService.selectAll());
 		
 		
-		return "/member/memberAll";
+		return "member/memberAll";
 	}
 	//등록페이지
 	@RequestMapping(value="/memberInsert", method=RequestMethod.GET)
@@ -93,9 +94,17 @@ public class MemberController {
 	
 	@RequestMapping("/memberListAjax")
 	@ResponseBody
-	public ArrayList<MemberVO> memberListAjax() {
+	public List<MemberVO> memberListAjax() {
 		//회원조회
 		return memberService.selectAll();
+	}
+	
+	
+	@RequestMapping("/memberSelectOneAjax")
+	@ResponseBody
+	public MemberVO memberSelectOneAjax(MemberVO memberVO) {
+		//회원조회
+		return memberService.selectOne(memberVO);
 	}
 }
 

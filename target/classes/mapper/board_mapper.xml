@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yedam.app.board.mapper.BoardDAO">
+	
+	<!-- 맵핑 (vo(property)와 오라클 컬럼명(column)) -->
+	<resultMap type="board" id="boardMap">
+		<id 	property="board_no" 		column="NO" />
+		<result property="board_subject" 	column="SUBJECT"/>
+		<result property="contents" 		column="CONTENTS"/>
+		<result property="poster"			column="POSTER"/>
+		<result property="lastpost" 		column="LASTPOST"/>
+		<result property="views" 			column="VIEWS"/>
+		<result property="filename" 		column="FILENAME"/>
+	</resultMap>
+	
+	<select id="selectMap" resultType="map">
+		SELECT NO			as "no", 
+			   SUBJECT		as "subject", 
+			   CONTENTS 	as "contents",
+			   POSTER 		as "poster",
+			   LASTPOST		as "lastpost", 		
+			   VIEWS		as "views", 
+			   FILENAME,
+			   NAME,
+			   GENDER,
+			   ROLE
+			FROM BOARD, USERS
+			WHERE BOARD.POSTER = USERS.ID
+			ORDER BY NO
+	</select>
+	
+	<select id="selectCnt" resultType="int">
+		SELECT COUNT(*) FROM BOARD
+	</select>
+	
+	<!-- 전체조회 -->
+	<!-- 맵핑하게되면 resultMap, as사용시 resultType -->
+	<select id="selectAll" resultType="board" parameterType="board">
+		SELECT A.* FROM ( SELECT ROWNUM RN, B.* FROM (
+			SELECT NO		board_no, 
+				   SUBJECT	board_subject, 
+				   CONTENTS, 
+				   POSTER, 
+				   LASTPOST, 
+				   VIEWS, 
+				   FILENAME
+				FROM BOARD
+				<where>
+				<if test="poster != null and poster != ''">
+				POSTER LIKE '%' || #{poster} || '%'
+				</if>
+				<if test="boardSubject != null and boardSubject != ''">
+				AND SUBJECT LIKE '%' || #{boardSubject} || '%'
+				</if>
+				</where>
+				ORDER BY NO DESC 
+		) B ) A WHERE RN BETWEEN #{first} and #{last}
+	</select>
+	 
+	<!-- 게시글 등록 -->
+	<insert id="insert">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+	    	SELECT NVL(MAX(NO),0) + 1 FROM BOARD
+	  	</selectKey>
+	  	
+		INSERT INTO BOARD (
+						   NO,
+						   POSTER,
+						   SUBJECT,
+						   CONTENTS
+						   <if test="filename != null and filename != ''">
+						   ,FILENAME
+						   </if>
+						   )
+					VALUES (
+							#{no},
+							#{poster},
+							#{subject},
+							#{contents}
+							<if test="filename != null and filename != ''">
+						   	,#{filename}
+						   	</if>
+							)
+	</insert>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="deleteAll" parameterType="board">
+		DELETE FROM BOARD
+		WHERE NO IN
+		<!-- jstl에서 itmes가 collection, val이 item과 같음 -->
+		<foreach collection="nos" item="i" open="(" close=")" separator=",">
+			#{i}
+		</foreach>
+	</delete>
+	
+</mapper>

@@ -15,7 +15,7 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired MemberDAO memberDAO;
 
 	@Override
-	public ArrayList<MemberVO> selectAll() {
+	public List<MemberVO> selectAll() {
 		return memberDAO.selectAll();
 	}
 

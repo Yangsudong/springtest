@@ -9,11 +9,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
 
 import com.yedam.app.member.MemberVO;
 
-@Component
+//@Component
 public class MemberSpringDAO implements MemberDAO{
 	
 	@Autowired JdbcTemplate template;
@@ -41,8 +40,8 @@ public class MemberSpringDAO implements MemberDAO{
 	}
 	
 	@Override
-	public ArrayList<MemberVO> selectAll() {
-		return (ArrayList<MemberVO>) template.query(SELECT_ALL_MEMBER, new MemberRowMapper());
+	public List<MemberVO> selectAll() {
+		return (List<MemberVO>) template.query(SELECT_ALL_MEMBER, new MemberRowMapper());
 	}
 
 	@Override

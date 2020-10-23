@@ -22,9 +22,9 @@ public class MemberJavaDAO implements MemberDAO {
 	
 	//전체조회
 	@Override
-	public ArrayList<MemberVO> selectAll() {
+	public List<MemberVO> selectAll() {
 		MemberVO resultVO = null;
-		ArrayList<MemberVO> list = new ArrayList<MemberVO>(); 
+		List<MemberVO> list = new ArrayList<MemberVO>(); 
 		
 		try {
 			conn = ConnectionManager.getConnnect();

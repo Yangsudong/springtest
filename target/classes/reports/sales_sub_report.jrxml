@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.2.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sales_sub_report" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="27c55080-9486-4766-be36-ea79f743576e">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="hr_schema"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="647"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="353"/>
+	<parameter name="EMPLOYEE_ID" class="java.math.BigDecimal"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT *
+FROM "SALES_INFO"
+WHERE 
+	 EMPLOYEE_ID =  $P{EMPLOYEE_ID} ]]>
+	</queryString>
+	<field name="EMPLOYEE_ID" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="EMPLOYEE_ID"/>
+	</field>
+	<field name="WEEK" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="WEEK"/>
+	</field>
+	<field name="SALES" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="SALES"/>
+	</field>
+	<field name="SALES_DAY" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SALES_DAY"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="151" height="30" uuid="8155e1cd-43ba-4665-a792-4df5bb085c3a"/>
+				<textFieldExpression><![CDATA[$F{EMPLOYEE_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="151" y="0" width="148" height="30" uuid="c5035036-df8a-49bb-908b-6fd156cb667c"/>
+				<textFieldExpression><![CDATA[$F{WEEK}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="299" y="0" width="148" height="30" uuid="3d0d18e7-29c9-44ad-bcef-ee745faefa88"/>
+				<textFieldExpression><![CDATA[$F{SALES}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="447" y="0" width="148" height="30" uuid="63071676-305f-44dd-aba6-138737a4eb23"/>
+				<textFieldExpression><![CDATA[$F{SALES_DAY}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
